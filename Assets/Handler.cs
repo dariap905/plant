@@ -65,10 +65,13 @@ public class Handler : MonoBehaviour
 
     public Boolean musicOn;
 
-    public Text GameOverText;
-
     public GameObject Cactus;
     public GameObject CactusBugs;
+
+    public GameObject RadioOn;
+    public GameObject RadioOff;
+
+    public AudioSource bgmusic;
 
 
     // Start is called before the first frame update
@@ -78,55 +81,78 @@ public class Handler : MonoBehaviour
         bt1.onClick.AddListener(WaterPlant);
 
         Button bt2 = Talk.GetComponent<Button>();
-        bt1.onClick.AddListener(TalkToPlant);
+        bt2.onClick.AddListener(TalkToPlant);
 
         Button bt3 = Remove.GetComponent<Button>();
-        bt1.onClick.AddListener(RemoveBugs);
+        bt3.onClick.AddListener(RemoveBugs);
+
+        Button bt4 = Quit.GetComponent<Button>();
+        bt4.onClick.AddListener(QuitGame);
+
+        Button bt5 = Music.GetComponent<Button>();
+        bt5.onClick.AddListener(HandleMusic);
 
         Cactus.gameObject.SetActive(true);
         CactusBugs.gameObject.SetActive(false);
+
+        RadioOn.gameObject.SetActive(true);
+        RadioOff.gameObject.SetActive(false);
+
         WaterValue = 100f;
         HappinessValue = 100f;
         BugsValue = 0f;
 
     }
 
+    private void HandleMusic()
+    {
+        if (bgmusic.isPlaying)
+        {
+            bgmusic.Pause();
+            RadioOn.gameObject.SetActive(false);
+            RadioOff.gameObject.SetActive(true);
+        }
+
+        else 
+        {
+            bgmusic.Play();
+            RadioOn.gameObject.SetActive(true);
+            RadioOff.gameObject.SetActive(false);
+        }
+    }
+
+    private void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void TalkToPlant()
     {
-        throw new NotImplementedException();
+        HappinessValue += 20;
     }
 
     private void WaterPlant()
     {
-        throw new NotImplementedException();
+        WaterValue += 30;
     }
 
     private void RemoveBugs()
     {
-        throw new NotImplementedException();
+        BugsValue -= 10;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        WaterValue -= 0.01f;
-        if(WaterValue < min)
-        {
-            WaterValue = min;
-        }
+        WaterValue -= 0.001f;
+        WaterValue = Mathf.Clamp(WaterValue, min, max);
 
-        HappinessValue -= 0.01f;
-        if (HappinessValue < min)
-        {
-            HappinessValue = min;
-        }
+        HappinessValue -= 0.001f;
+        HappinessValue = Mathf.Clamp(HappinessValue, min, max);
 
-        BugsValue += 0.01f;
-        if (BugsValue > max)
-        {
-            BugsValue = max;
-        }
+        BugsValue += 0.001f;
+        BugsValue = Mathf.Clamp(BugsValue, min, max);
 
         needsCheck();
 
@@ -134,10 +160,15 @@ public class Handler : MonoBehaviour
 
     private void needsCheck()
     {
-        if (BugsValue >= 80)
+        if (BugsValue > 80)
         {
             Cactus.gameObject.SetActive(false);
             CactusBugs.gameObject.SetActive(true);
+        }
+        if (BugsValue < 80)
+        {
+            Cactus.gameObject.SetActive(true);
+            CactusBugs.gameObject.SetActive(false);
         }
 
     }
