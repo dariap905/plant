@@ -63,13 +63,16 @@ public class Handler : MonoBehaviour
     public Button Quit;
     public Button Music;
 
-    public Boolean musicOn;
+    public bool musicOn;
 
     public GameObject Cactus;
     public GameObject CactusBugs;
 
     public GameObject RadioOn;
     public GameObject RadioOff;
+
+    public GameObject bugPrefab;
+    public GameObject[] bugs = new GameObject[4];
 
     public AudioSource bgmusic;
 
@@ -154,21 +157,60 @@ public class Handler : MonoBehaviour
         BugsValue += 0.001f;
         BugsValue = Mathf.Clamp(BugsValue, min, max);
 
-        needsCheck();
+        NeedsCheck();
 
     }
 
-    private void needsCheck()
+    public bool showbugs = false;
+
+    private void NeedsCheck()
     {
-        if (BugsValue > 80)
+        if (BugsValue >= 80)
         {
+            showbugs = true;
             Cactus.gameObject.SetActive(false);
             CactusBugs.gameObject.SetActive(true);
+
         }
-        if (BugsValue < 80)
+        if (BugsValue <= 80)
         {
+            showbugs = false;
             Cactus.gameObject.SetActive(true);
             CactusBugs.gameObject.SetActive(false);
+        }
+
+        if (showbugs)
+        {
+            InstantiateMealybugs();
+        }
+
+        if (!showbugs)
+        {
+            DestroyMealybugs();
+        }
+
+    }
+
+    private void InstantiateMealybugs()
+    {
+        float xoffset = 0.5f;
+        float yoffset = 0.5f;
+
+        for (int i = 0; i < bugs.Length; i++)
+        {
+            
+            bugs[i] = Instantiate(bugPrefab, new Vector3(0+xoffset, -3.8f + yoffset, 0), Quaternion.identity);
+            xoffset += 0.5f;
+            yoffset += 0.5f;
+        }
+        
+    }
+
+    private void DestroyMealybugs()
+    {
+        foreach (var bug in bugs)
+        {
+            Destroy(bug);
         }
 
     }

@@ -1449,7 +1449,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 9b0096027f9b7e347806db559897b54d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2003,6 +2003,8 @@ MonoBehaviour:
   CactusBugs: {fileID: 1025824328}
   RadioOn: {fileID: 895403230}
   RadioOff: {fileID: 1498824162}
+  bugPrefab: {fileID: 4450522026747326426, guid: e7ec49ccacafecd4897ef9e9962ae2f9, type: 3}
+  bug: {fileID: 0}
   bgmusic: {fileID: 1126342147}
 --- !u!82 &1126342147
 AudioSource:
