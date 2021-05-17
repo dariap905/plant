@@ -72,9 +72,11 @@ public class Handler : MonoBehaviour
     public GameObject RadioOff;
 
     public GameObject bugPrefab;
-    public GameObject[] bugs = new GameObject[4];
+    public GameObject[] bugs = new GameObject[3];
 
     public AudioSource bgmusic;
+
+    public bool showbugs = false;
 
 
     // Start is called before the first frame update
@@ -103,7 +105,11 @@ public class Handler : MonoBehaviour
 
         WaterValue = 100f;
         HappinessValue = 100f;
-        BugsValue = 0f;
+        BugsValue = 80f;
+
+        InstantiateMealybugs();
+        HideMealybugs();
+        
 
     }
 
@@ -144,7 +150,6 @@ public class Handler : MonoBehaviour
         BugsValue -= 10;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -161,8 +166,6 @@ public class Handler : MonoBehaviour
 
     }
 
-    public bool showbugs = false;
-
     private void NeedsCheck()
     {
         if (BugsValue >= 80)
@@ -172,7 +175,7 @@ public class Handler : MonoBehaviour
             CactusBugs.gameObject.SetActive(true);
 
         }
-        if (BugsValue <= 80)
+        if (BugsValue <= 80 )
         {
             showbugs = false;
             Cactus.gameObject.SetActive(true);
@@ -181,36 +184,46 @@ public class Handler : MonoBehaviour
 
         if (showbugs)
         {
-            InstantiateMealybugs();
+            ShowMealybugs();
         }
 
         if (!showbugs)
         {
-            DestroyMealybugs();
+            HideMealybugs();
         }
 
     }
 
     private void InstantiateMealybugs()
     {
-        float xoffset = 0.5f;
-        float yoffset = 0.5f;
+
+        float xOffset = -0.5f;
 
         for (int i = 0; i < bugs.Length; i++)
         {
             
-            bugs[i] = Instantiate(bugPrefab, new Vector3(0+xoffset, -3.8f + yoffset, 0), Quaternion.identity);
-            xoffset += 0.5f;
-            yoffset += 0.5f;
+            bugs[i] = Instantiate(bugPrefab, new Vector3(xOffset, 0, 0), Quaternion.identity);
+            xOffset += 0.5f;
         }
         
     }
 
-    private void DestroyMealybugs()
+    private float getRandomOffset(){
+        return UnityEngine.Random.Range(-1.0f, 1.0f);
+    }
+
+    private void ShowMealybugs()
     {
-        foreach (var bug in bugs)
-        {
-            Destroy(bug);
+        for(int i = 0; i < bugs.Length; i++){
+            bugs[i].gameObject.SetActive(true);
+        }
+
+    }
+
+    private void HideMealybugs()
+    {
+        for(int i = 0; i < bugs.Length; i++){
+            bugs[i].gameObject.SetActive(false);
         }
 
     }

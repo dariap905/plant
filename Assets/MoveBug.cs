@@ -9,8 +9,8 @@ public class MoveBug : MonoBehaviour
 
     public void Update()
     {
-        float y = Mathf.PingPong(Time.time * speed, 1) * 4 - 4;
-        bug.transform.position = new Vector3(0, y, 0);
+        float y = Mathf.PingPong(Time.time * speed, 1) * 2 - 4;
+        bug.transform.position = new Vector3(transform.position.x, y, 0);
 
     }
 

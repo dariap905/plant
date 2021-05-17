@@ -354,7 +354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98, y: -113}
+  m_AnchoredPosition: {x: 45, y: -90}
   m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.4, y: 1.6}
 --- !u!114 &147123886
@@ -1086,7 +1086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98, y: -113}
+  m_AnchoredPosition: {x: 45, y: -85}
   m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.4, y: 0.6}
 --- !u!114 &620257848
@@ -2004,8 +2004,12 @@ MonoBehaviour:
   RadioOn: {fileID: 895403230}
   RadioOff: {fileID: 1498824162}
   bugPrefab: {fileID: 4450522026747326426, guid: e7ec49ccacafecd4897ef9e9962ae2f9, type: 3}
-  bug: {fileID: 0}
+  bugs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   bgmusic: {fileID: 1126342147}
+  showbugs: 0
 --- !u!82 &1126342147
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2749,7 +2753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98, y: -113}
+  m_AnchoredPosition: {x: 45, y: -90}
   m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.4, y: 2.6}
 --- !u!114 &1660503911
